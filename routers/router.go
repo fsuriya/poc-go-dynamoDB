@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"poc-go-dynamodb/routers/auth"
-	"poc-go-dynamodb/routers/kol"
+	"poc-go-dynamodb/routers/v1/auth"
+	"poc-go-dynamodb/routers/v1/kol"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,14 +13,14 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	// Define auth route group
-	authGroup := r.Group("/auth")
+	authGroup := r.Group("/v1/auth")
 	{
 		authGroup.POST("/signin", auth.SignIn)
 		authGroup.POST("/register", auth.Register)
 	}
 
 	// Define KOL route group
-	kolGroup := r.Group("/kol")
+	kolGroup := r.Group("/v1/kol")
 	{
 		kolGroup.POST("/", kol.CreateKOL)
 		kolGroup.PATCH("/:kol_id", kol.UpdateKOL)
